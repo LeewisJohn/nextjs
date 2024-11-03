@@ -13,7 +13,7 @@ async function bootstrap() {
 
   // Enable CORS for all origins
   app.enableCors({
-    origin: 'https://ticket-leewis.web.app/', // Allow all origins
+    origin: 'https://ticket-leewis.web.app', // Allow all origins
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept',
     credentials: false, // Allow credentials if needed
