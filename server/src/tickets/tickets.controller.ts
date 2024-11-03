@@ -15,17 +15,20 @@ import { TicketsService } from './tickets.service';
 
 @Controller('tickets')
 export class TicketsController {
-  constructor(private ticketsService: TicketsService) {}
+  constructor(private ticketsService: TicketsService) { }
 
   @Get()
-  async getTickets() {
-    await randomDelay();
+  async getTicketss() {
     return this.ticketsService.tickets();
+  }
+
+  @Get('ok')
+  async getOK() {
+    return {};
   }
 
   @Get(':id')
   async getTicket(@Param('id') id: string) {
-    await randomDelay();
     const ticket = await this.ticketsService.ticket(Number(id));
     if (ticket) return ticket;
     throw new NotFoundException();
@@ -33,7 +36,6 @@ export class TicketsController {
 
   @Post()
   async createTicket(@Body() createDto: { description: string }) {
-    await randomDelay();
     return this.ticketsService.newTicket(createDto);
   }
 
@@ -43,7 +45,6 @@ export class TicketsController {
     @Param('ticketId') ticketId: string,
     @Param('userId') userId: string
   ) {
-    await randomDelay();
     const success = await this.ticketsService.assign(
       Number(ticketId),
       Number(userId)
@@ -54,7 +55,6 @@ export class TicketsController {
   @Put(':ticketId/unassign')
   @HttpCode(204)
   async unassignTicket(@Param('ticketId') ticketId: string) {
-    await randomDelay();
     const success = await this.ticketsService.unassign(Number(ticketId));
     if (!success) throw new UnprocessableEntityException();
   }
@@ -62,7 +62,6 @@ export class TicketsController {
   @Put(':id/complete')
   @HttpCode(204)
   async markAsComplete(@Param('id') ticketId: string) {
-    await randomDelay();
     const success = await this.ticketsService.complete(Number(ticketId), true);
     if (!success) throw new UnprocessableEntityException();
   }
@@ -70,7 +69,6 @@ export class TicketsController {
   @Delete(':id/complete')
   @HttpCode(204)
   async markAsIncomplete(@Param('id') ticketId: string) {
-    await randomDelay();
     const success = await this.ticketsService.complete(Number(ticketId), false);
     if (!success) throw new UnprocessableEntityException();
   }
