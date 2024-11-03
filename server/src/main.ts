@@ -16,7 +16,7 @@ async function bootstrap() {
     origin: '*', // Allow all origins
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept',
-    credentials: true, // Allow credentials if needed
+    credentials: false, // Allow credentials if needed
   });
 
   // Swagger configuration
